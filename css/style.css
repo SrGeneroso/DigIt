@@ -1,0 +1,492 @@
+/*
+    CSS Global
+    */
+
+#overlay {
+    position: absolute;
+    /* Sit on top of the page content */
+    display: none;
+    /* Hidden by default */
+    min-width: 1000px;
+    max-width: 1000px;
+    min-height: 1000px;
+    max-height: 1000px;
+    margin: auto;
+    background-image: url(../img/bckgrnd/bckMain.webp);
+    background-size: 100%;
+    z-index: 3;
+    /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer;
+    /* Add a pointer on hover */
+}
+
+
+/*Limitacion de tamaño*/
+
+body {
+    /*background: fuchsia;*/
+    min-width: 1000px;
+    max-width: 1000px;
+    min-height: 1000px;
+    max-height: 1000px;
+    margin: auto;
+    background-image: url(../img/bckgrnd/bckMain.webp);
+    background-size: 100%;
+}
+
+
+/* principal*/
+
+.wrapper {
+    margin: 0 auto;
+    display: grid;
+    max-width: 1000px;
+    max-height: 800px;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 800px;
+}
+
+
+/*
+    CSS Del Bloque Titulo
+    */
+
+
+/* bloque del titulo*/
+
+.title {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    position: relative;
+    margin: 5px 0px;
+    /*background-color: #91908e;*/
+    border-radius: 25px;
+    background-image: url(../img/bckgrnd/bckTitle.webp);
+    background-size: 98% 454%;
+    background-position-x: 40%;
+    background-position-y: 50%;
+}
+
+
+/*Texto del titulo*/
+
+.titleText {
+    min-height: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+}
+
+
+/*
+    CSS Del Menu IZQ
+    */
+
+
+/*Menu Izq*/
+
+.menuLeft {
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 4fr;
+    row-gap: 10px;
+}
+
+
+/* Bloque Tiempo*/
+
+.menuTimer {
+    /*background: #b5b5b3;
+    border-radius: 15px;*/
+    text-align: center;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    background-image: url(../img/bckgrnd/bckTimer.webp);
+    background-size: 102% 104%;
+}
+
+
+/*Titulo de Tiempo*/
+
+
+/*Texto de Tiempo*/
+
+.currentTime {
+    text-align: center;
+    display: inline-block;
+}
+
+
+/*Bloque Powers*/
+
+.mnPowers {
+    background: #b5b5b3;
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 2fr;
+    justify-items: center;
+    background-image: url(../img/bckgrnd/bckMuseum.webp);
+    background-size: 158% 110%;
+    background-position-x: 47%;
+    background-position-y: 25%;
+}
+
+
+/*Titulo Powers*/
+
+.mnPowers-title {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+
+/*Powers*/
+
+.mnPowers-item {
+    background: rgb(143, 143, 143);
+    border-radius: 15px;
+    width: 80%;
+    height: 80%;
+    display: flex;
+    position: relative;
+}
+
+
+/*Contador de los powers*/
+
+.powerCounter {
+    position: absolute;
+    width: 30%;
+    height: 25%;
+    z-index: 2;
+    left: 60%;
+    top: 70%;
+    background-color: cyan;
+    border-radius: 15px;
+    text-align: center;
+}
+
+
+/*Bloque Puntuacion General*/
+
+.menuScore {
+    background: cornflowerblue;
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    background-image: url(../img/bckgrnd/bckScore.webp);
+    background-size: 325% 118%;
+    background-position-x: 47%;
+    background-position-y: 50%;
+}
+
+
+/*Bloque Puntuacion*/
+
+.mnScorePoints {
+    /*background: darkcyan;*/
+    border-radius: 15px;
+    width: 80%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+
+/*Bloque Objetos Encontrados*/
+
+.mnScoreItems {
+    /*background: darkcyan;*/
+    border-radius: 15px;
+    width: 80%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+
+/*Bloque Total Objetos*/
+
+.mnScoreTotal {
+    /*background: darkcyan;
+    border-radius: 15px;*/
+    width: 80%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+
+/*Titulos Puntuacion*/
+
+.mnScoreTitle {
+    text-align: center;
+}
+
+
+/*Texto Puntuaciones*/
+
+.mnScoreValue {
+    text-align: center;
+}
+
+
+/*
+    CSS Menu DCH
+    */
+
+
+/*Menu Dch*/
+
+.menuRight {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 4fr 2fr;
+    row-gap: 10px;
+}
+
+
+/*Bloque Items*/
+
+.mnObjetos {
+    display: grid;
+    grid-template-rows: 2fr 10fr 1fr;
+    border-radius: 15px;
+    background-image: url(../img/bckgrnd/bckItems.webp);
+    background-size: 399% 104%;
+    background-position-x: 49%;
+    background-position-y: 68%;
+}
+
+.gridObjetos {
+    display: grid;
+    grid-gap: 5px;
+}
+
+
+/*Titulo Items*/
+
+.mnObjetos-title {
+    font-size: large;
+    text-align: center;
+    align-self: end;
+}
+
+
+/*Grid de Item*/
+
+.mnObjetos-item {
+    display: grid;
+}
+
+.mnObjetos-img {
+    justify-self: center;
+    align-self: center;
+    z-index: 1;
+    width: 40%;
+}
+
+
+/*Bloque Museo*/
+
+.menuMuseum {
+    background: chocolate;
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(7, 1fr);
+    justify-items: center;
+    align-items: center;
+    row-gap: 2px;
+    background-image: url(../img/bckgrnd/bckMuseum.webp);
+    background-size: 234% 135%;
+    background-position-x: 49%;
+    background-position-y: 17%;
+}
+
+
+/*Titulo museo*/
+
+.menuMuseumTitle {
+    background: darkgray;
+    height: 90%;
+    width: 90%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+
+/*Items Museo*/
+
+.menuMuseumItem {
+    background: rgba(192, 192, 192, 0.151);
+    height: 90%;
+    width: 90%;
+    border-radius: 15px;
+    text-align: center;
+}
+
+
+/*
+    CSS Bloque Central
+    */
+
+
+/* Bloque Central*/
+
+.mainBlock {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 4fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+
+/* Grid Tablero*/
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(var(--boardX), 1fr);
+    grid-template-rows: repeat(var(--boardY), 1fr);
+    width: 95%;
+    height: 95%;
+}
+
+:root {
+    --boardX: 10;
+    --boardY: 10;
+}
+
+
+/*Tile*/
+
+.tile {
+    background-size: 100%;
+    border-radius: 5px;
+    margin: 1px;
+    transition: ease-in-out, 0.2s;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.undigged {
+    background-image: url(../img/bckgrnd/tex_tile_1.webp);
+}
+
+.digged {
+    background-image: url(../img/bckgrnd/tex_tile_2.webp);
+}
+
+.undigged:hover {
+    transform: rotate(180deg) scale(1.1);
+}
+
+.itemImg {
+    justify-self: center;
+    align-self: center;
+    z-index: 1;
+    width: 85%;
+}
+
+.itemImg.rot-0 {
+    transform: rotate(0);
+}
+
+.itemImg.rot-1 {
+    transform: rotate(90deg);
+}
+
+.itemImg.rot-2 {
+    transform: rotate(-90deg);
+}
+
+.itemImg.rot-3 {
+    transform: rotate(+180deg);
+}
+
+.itemImg-trans {
+    max-width: 80%;
+    max-height: auto;
+    opacity: 0.25;
+}
+
+
+/*
+        Clases de la barra de energia.
+    */
+
+
+/* Gas Restante*/
+
+.playerEnergy {
+    /*background: rgb(33, 121, 252); */
+    border-radius: 25px;
+    display: grid;
+    width: 90%;
+    height: 90%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 3fr;
+    justify-items: center;
+    align-items: center;
+    row-gap: 2px;
+    background-image: url(../img/bckgrnd/bckEnergy.webp);
+    background-size: 117% 478%;
+    background-position-x: 46%;
+    background-position-y: 50%;
+}
+
+.plyrNrgTitle {
+    /*background: rgb(252, 33, 234);*/
+    width: 90%;
+    height: 90%;
+    text-align: center;
+}
+
+.plyrNrgBarBlock {
+    width: 90%;
+    height: 80%;
+}
+
+.nrgBarBackground {
+    padding: 6px;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+    height: 90%;
+}
+
+.nrg-bar {
+    height: 99%;
+    border-radius: 25px;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+}
+
+.nrg-moved .nrg-bar {
+    width: 0%;
+    background-color: hsl(0, 80%, 50%);
+    transition: all .5s ease-in-out;
+}
