@@ -581,7 +581,7 @@ const masterItem = [{
         ]
     },
     {
-        imgSrc: "./img/items/igarrillo_0.webp",
+        imgSrc: "./img/items/cigarrillo_0.webp",
         name: "Cigarrillo",
         type: "Item",
         piece: [
