@@ -74,7 +74,9 @@ function StartGame() {
     SetMapSize();
     SetMatch();
     MakePowerMenu();
+    MakeLevelMenu();
     ResetBoard();
+    // showOverlay();
     // playMusic();
 }
 
@@ -82,6 +84,17 @@ function StartGame() {
 //funcion para mostrar overlay
 function showOverlay() {
     document.getElementById("overlay").style.display = "grid";
+}
+
+function MakeLevelMenu() {
+    stageMaster.forEach((level, index) => {
+        let newLevelItem = document.createElement('div');
+        newLevelItem.classList.add("mnLevelItem");
+        newLevelItem.id = "Level" + (index + 1)
+        newLevelItem.textContent = "Level " + (index + 1)
+        document.getElementById("mnLevel").appendChild(newLevelItem);
+    })
+
 }
 /* >> FUNCIONES BASICAS PARA CREACION DEL TABLERO */
 function ResetBoard() {

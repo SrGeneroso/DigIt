@@ -1,6 +1,25 @@
 /*
     CSS Global
-    */
+*/
+
+
+/*Tamaño de tablero predeterminado*/
+
+:root {
+    --boardX: 10;
+    --boardY: 10;
+}
+
+
+/* Definicion de fuente global*/
+
+@font-face {
+    font-family: 'stencil';
+    src: url(../fonts/stencil.ttf);
+}
+
+
+/* Overlay de menu*/
 
 #overlay {
     position: absolute;
@@ -32,6 +51,7 @@ body {
     margin: auto;
     background-image: url(../img/bckgrnd/bckMain.webp);
     background-size: 100%;
+    font-family: 'stencil';
 }
 
 
@@ -94,7 +114,7 @@ body {
     display: grid;
     position: relative;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 4fr;
+    grid-template-rows: 1fr 1fr 1fr 3fr;
     row-gap: 10px;
 }
 
@@ -102,27 +122,29 @@ body {
 /* Bloque Tiempo*/
 
 .menuTimer {
-    /*background: #b5b5b3;
-    border-radius: 15px;*/
-    text-align: center;
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 2fr;
     grid-template-columns: 1fr;
-    justify-items: center;
-    align-items: center;
     background-image: url(../img/bckgrnd/bckTimer.webp);
-    background-size: 102% 104%;
+    background-size: 100%;
 }
 
 
 /*Titulo de Tiempo*/
 
+.menuTimerTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /*Texto de Tiempo*/
 
 .currentTime {
-    text-align: center;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -147,6 +169,9 @@ body {
 .mnPowers-title {
     grid-column-start: 1;
     grid-column-end: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -263,7 +288,7 @@ body {
 .menuRight {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 4fr 2fr;
+    grid-template-rows: 8fr 1fr;
     row-gap: 10px;
 }
 
@@ -289,9 +314,9 @@ body {
 /*Titulo Items*/
 
 .mnObjetos-title {
-    font-size: large;
-    text-align: center;
-    align-self: end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -311,12 +336,11 @@ body {
 
 /*Bloque Museo*/
 
-.menuMuseum {
-    background: chocolate;
+.menuLevel {
     border-radius: 15px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(7, 1fr);
+    grid-template-rows: 1fr 6fr;
     justify-items: center;
     align-items: center;
     row-gap: 2px;
@@ -326,27 +350,33 @@ body {
     background-position-y: 17%;
 }
 
+.mnLevel {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.mnLevelItem {
+    background: rgba(192, 192, 192, 0.151);
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+}
+
+.mnLevelItemCurrent {}
+
 
 /*Titulo museo*/
 
-.menuMuseumTitle {
-    background: darkgray;
-    height: 90%;
-    width: 90%;
-    border-radius: 10px;
-    text-align: center;
+.menuLevelTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
 /*Items Museo*/
 
-.menuMuseumItem {
-    background: rgba(192, 192, 192, 0.151);
-    height: 90%;
-    width: 90%;
-    border-radius: 15px;
-    text-align: center;
-}
+.menuMuseumItem {}
 
 
 /*
@@ -375,11 +405,6 @@ body {
     height: 95%;
 }
 
-:root {
-    --boardX: 10;
-    --boardY: 10;
-}
-
 
 /*Tile*/
 
@@ -395,6 +420,7 @@ body {
 
 .undigged {
     background-image: url(../img/bckgrnd/tex_tile_1.webp);
+    cursor: cell;
 }
 
 .digged {
