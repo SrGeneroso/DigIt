@@ -49,8 +49,8 @@ var currentLevelItemNumber = 0;
 //link al modulo de sonido
 var musicGame = document.getElementById("music");
 var fxGame = document.getElementById("fx");
-var clickFx = "../sounds/click.mp3";
-var drillFx = "../sounds/drill.mp3";
+var clickFx = "./sounds/click.mp3";
+var drillFx = "./sounds/drill.mp3";
 
 //control de puntuacion
 var currentLevelScore = 0;
