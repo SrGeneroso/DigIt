@@ -23,20 +23,45 @@
 
 #overlay {
     position: absolute;
-    /* Sit on top of the page content */
-    display: none;
-    /* Hidden by default */
+    display: grid;
+    z-index: 3;
+    background-color: rgb(253, 253, 253);
     min-width: 1000px;
     max-width: 1000px;
-    min-height: 1000px;
-    max-height: 1000px;
-    margin: auto;
-    background-image: url(../img/bckgrnd/bckMain.webp);
-    background-size: 100%;
-    z-index: 3;
-    /* Specify a stack order in case you're using a different order for other elements */
+    min-height: 800px;
+    max-height: 800px;
+    border-radius: 50px;
+    background-image: url(../img/bckgrnd/overlaybckgrnd.webp);
+    color: wheat;
+    word-spacing: 5px;
+    letter-spacing: 2px;
+}
+
+.overlayMain {
+    display: flex;
+}
+
+.overlayText {
+    justify-self: center;
+    align-self: center;
+    cursor: default;
+    font-size: x-large;
+    text-align: center;
+    width: 75%;
+}
+
+.overlayButton {
+    justify-self: center;
+    align-self: center;
     cursor: pointer;
-    /* Add a pointer on hover */
+    background-image: url(../img/bckgrnd/bckTitle.webp);
+    background-size: 100% 500%;
+    background-position-x: 40%;
+    background-position-y: 50%;
+    font-size: xx-large;
+    width: 40%;
+    text-align: center;
+    color: black;
 }
 
 
@@ -82,6 +107,7 @@ body {
     background-size: 98% 454%;
     background-position-x: 40%;
     background-position-y: 50%;
+    font-size: larger;
 }
 
 
@@ -118,10 +144,11 @@ body {
 
 .menuTimer {
     display: grid;
-    grid-template-rows: 1fr 2fr;
+    grid-template-rows: 1.5fr 2fr 1.5fr;
     grid-template-columns: 1fr;
     background-image: url(../img/bckgrnd/bckTimer.webp);
-    background-size: 100%;
+    background-size: contain;
+    background-repeat: round;
 }
 
 
@@ -131,6 +158,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: larger;
 }
 
 
@@ -140,6 +168,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: large;
 }
 
 
@@ -149,7 +178,7 @@ body {
     border-radius: 15px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 2fr 0.5fr;
+    grid-template-rows: 1fr 2fr 1fr;
     background-image: url(../img/bckgrnd/bckMuseum.webp);
     background-size: 158% 110%;
     background-position-x: 47%;
@@ -165,6 +194,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: larger;
 }
 
 
@@ -176,6 +206,7 @@ body {
     position: relative;
     height: 90%;
     width: 80%;
+    display: grid;
     justify-self: center;
     align-self: center;
     cursor: pointer;
@@ -199,13 +230,10 @@ body {
 /*Bloque Puntuacion General*/
 
 .menuScore {
-    background: cornflowerblue;
     border-radius: 15px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    justify-items: center;
-    align-items: center;
+    grid-template-rows: 0.75fr 1fr 1fr 0.25fr;
     background-image: url(../img/bckgrnd/bckScore.webp);
     background-size: 325% 118%;
     background-position-x: 47%;
@@ -213,54 +241,22 @@ body {
 }
 
 
-/*Bloque Puntuacion*/
-
-.mnScorePoints {
-    /*background: darkcyan;*/
-    border-radius: 15px;
-    width: 80%;
-    height: 80%;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    align-items: center;
-}
-
-
 /*Bloque Objetos Encontrados*/
 
 .mnScoreItems {
-    /*background: darkcyan;*/
     border-radius: 15px;
-    width: 80%;
-    height: 80%;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    justify-items: center;
-    align-items: center;
-}
-
-
-/*Bloque Total Objetos*/
-
-.mnScoreTotal {
-    /*background: darkcyan;
-    border-radius: 15px;*/
-    width: 80%;
-    height: 80%;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    justify-items: center;
-    align-items: center;
+    display: flex;
+    flex-flow: column;
 }
 
 
 /*Titulos Puntuacion*/
 
 .mnScoreTitle {
-    text-align: center;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    font-size: larger;
 }
 
 
@@ -268,6 +264,7 @@ body {
 
 .mnScoreValue {
     text-align: center;
+    font-size: larger;
 }
 
 
@@ -310,6 +307,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: larger;
 }
 
 
@@ -390,12 +388,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: larger;
 }
-
-
-/*Items Museo*/
-
-.menuMuseumItem {}
 
 
 /*
@@ -451,9 +445,11 @@ body {
 }
 
 .itemImg {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    /* align-items: center;
+    justify-content: center; */
+    align-self: center;
+    justify-self: center;
     z-index: 1;
     width: 85%;
 }

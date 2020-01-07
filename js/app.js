@@ -52,13 +52,34 @@ var fxGame = document.getElementById("fx");
 var clickFx = "../sounds/click.mp3";
 var drillFx = "../sounds/drill.mp3";
 
+//control de puntuacion
+var currentLevelScore = 0;
+var currentMatchScore = 0;
+
 /* FIN DE VARIABLES */
 
 
 /* >>FUNCION PRINCIPAL DEL SCRIPT */
-document.body.onload = (() => StartGame())
+document.body.onload = (() => ShowOverlay(overlayTextWelcome, overlayButtonWelcome, StartGame));
+
+/*Funciones de Overlay*/
 
 
+
+/* Funciones de puntuacion*/
+function UpdateLevelScore() {
+    let levelScore = document.getElementById("ScoreValue1");
+    levelScore.textContent = currentLevelScore;
+}
+
+function UpdateMatchscore() {
+    currentMatchScore = currentMatchScore + currentLevelScore;
+    currentLevelScore = 0;
+    UpdateLevelScore();
+    let matchScore = document.getElementById("ScoreValue2");
+    matchScore.textContent = currentMatchScore;
+
+}
 
 
 //Inicializamos las funciones principales
@@ -68,14 +89,45 @@ function StartGame() {
     MakePowerMenu();
     MakeSoundMenu();
     ResetBoard();
-    // showOverlay();
-    // playMusic();
+    HideOverlay();
+    playMusic();
+}
+
+function ResetMatch() {
+    window.location.reload()
 }
 
 /* <<FUNCION PRINCIPAL DEL SCRIPT */
 //funcion para mostrar overlay
-function showOverlay() {
-    document.getElementById("overlay").style.display = "grid";
+var overlayTextWelcome = "Bienvenido a DIG IT. Tu objetivo será encontrar los elementos ocultos antes de que se acabe tu energia y tiempo. Catch'Em All";
+var overlayButtonWelcome = "Empezar partida";
+var overlayTextLevel = "Nivel superado, tu puntuación es: ";
+var overlayButtonLevel = "Siguente nivel"
+var overlayButtonRestart = "¿Reiniciar juego?"
+var overlayTextLose = "Has perdido, mala suerte";
+var overlayTextWin = "Has ganado, tu puntuación total es: ";
+
+function ShowOverlay(currentText, currentButton, currentFunction) {
+    let currentOverlay = document.getElementById("overlay");
+    currentOverlay.style.display = "grid";
+
+    let newOverlayText = document.createElement('div');
+    newOverlayText.classList.add("overlayText");
+    newOverlayText.textContent = currentText;
+    currentOverlay.appendChild(newOverlayText);
+
+    let newOverlayButton = document.createElement('div');
+    newOverlayButton.classList.add("overlayButton");
+    newOverlayButton.textContent = currentButton;
+    newOverlayButton.addEventListener("click", currentFunction);
+    currentOverlay.appendChild(newOverlayButton);
+
+}
+
+function HideOverlay() {
+    let currentOverlay = document.getElementById("overlay");
+    currentOverlay.style.display = "none";
+    currentOverlay.innerHTML = "";
 }
 
 function MakeLevelMenu() {
@@ -103,6 +155,7 @@ function MakeLevelMenu() {
 }
 /* >> FUNCIONES BASICAS PARA CREACION DEL TABLERO */
 function ResetBoard() {
+    HideOverlay();
     //subimos el contador de nivel y resteamos el numero de objetos descubiertos
     ++currentPlayerLevel;
     playerCurrentTilesDiscovered = 0;
@@ -133,18 +186,24 @@ function ItemTilesInLevel() {
             item.piece.forEach(piece => {++currentLevelItemNumber })
         }
     })
-    console.log("TCL: ItemTilesInLevel -> currentLevelItemNumber", currentLevelItemNumber)
+
 
 }
 //funcion para comprobar si el nivel se ha completado
 function CheckLevelCompleted() {
     ++playerCurrentTilesDiscovered;
-    console.log("TCL: CheckLevelCompleted -> playerCurrentTilesDiscovered", playerCurrentTilesDiscovered)
-
     if (playerCurrentTilesDiscovered === currentLevelItemNumber) {
-        console.log("levelCompleted");
-        ResetBoard();
+
+        if (currentPlayerLevel + 2 > stageMaster.length) {
+            UpdateMatchscore();
+            ShowOverlay((overlayTextWin + currentMatchScore), overlayButtonRestart, ResetMatch);
+        } else {
+            UpdateMatchscore();
+            ShowOverlay((overlayTextLevel + currentMatchScore), overlayButtonLevel, ResetBoard);
+        }
+
     }
+
 
 }
 //Cambiamos en css las propiedades de la grid principal del tablero.
@@ -255,7 +314,6 @@ function playMusic() {
 function PlayFx(currentfx) {
     fxGame.src = currentfx;
     fxGame.volume = 0.1;
-    console.log("fx event");
 }
 
 function MuteFX() {
@@ -391,7 +449,9 @@ function StartTimer(timer = document.querySelector(".currentTime")) {
         //restamos un segundo
         currentTime--;
         //comprobamos si se ha agotado el tiempo
-        if (currentTime <= 0) { console.log("Te has quedado sin tiempo"); }
+        if (currentTime <= 0) {
+            ShowOverlay(overlayTextLose, overlayButtonRestart, ResetMatch);
+        }
         //Intervalo sobre el cual se va a relanzar la funcion en milisegundos
     }, 1000);
 }
@@ -438,11 +498,14 @@ function tileClick() {
 
     //reproduce efecto de sonido de la tile dependien do si tiene objeto o ono
     if (itHasItem) {
+        currentLevelScore = currentLevelScore + 15;
+        UpdateLevelScore();
         itemSolver(item);
         PlayFx(drillFx)
     } else {
+        currentLevelScore = currentLevelScore + 1;
+        UpdateLevelScore();
         nrgSubstract();
-        console.log("nothing, good luck next time");
         PlayFx(clickFx);
     }
 }
@@ -487,9 +550,7 @@ function PlayerItemPlay() {
             //comprobamos que haya un poder que usar    
             if (currentPowerFuel >= 1) {
                 //comprobamos que la nrg no esta completa
-                if ((currentNrg + nrgValueIncrement) >= 101) {
-                    console.log("energia maxima alcanzada");
-                } else {
+                if ((currentNrg + nrgValueIncrement) >= 101) {} else {
                     currentNrg = currentNrg + nrgValueIncrement;
                     energyBar.style.width = (currentNrg) + "%";
                     energyBar.style.backgroundColor = "hsl(" + currentNrg + ", 80%, 50%)";
@@ -499,13 +560,12 @@ function PlayerItemPlay() {
                     document.getElementById("PowerFuelID").textContent = currentPowerFuel;
                 }
             }
+            return
         case "PowerTime":
             //comprobamos que haya un poder que usar        
             if (currerntPowerTime >= 1) {
                 //Comprobamos si al añadir tiempo nos saldriamos del maximo
-                if (currentTime >= initTime - timeValueIncrement) {
-                    console.log("Tiempo maximo alcanzado");
-                } else {
+                if (currentTime >= initTime - timeValueIncrement) {} else {
                     //añadimos tiempo
                     currentTime = currentTime + timeValueIncrement;
                     //restamos uno al contador    
@@ -514,6 +574,7 @@ function PlayerItemPlay() {
                     document.getElementById("PowerTimeID").textContent = currerntPowerTime;
                 }
             }
+            return
     }
 }
 
@@ -531,12 +592,14 @@ function resetcurrentNrg() {
 function nrgSubstract() {
     currentNrg = currentNrg - nrgValueDecrement;
     if (currentNrg <= 0) {
-        console.log("youloose");
+        ShowOverlay(overlayTextLose, overlayButtonRestart, ResetMatch);
     } else {
         energyBar.style.width = (currentNrg) + "%";
         energyBar.style.backgroundColor = "hsl(" + currentNrg + ", 80%, 50%)";
     }
 }
+
+
 
 
 /* ARRAY PRINCIPAL CON TODOS LOS OBJETOS DE JUEGO*/
