@@ -306,7 +306,7 @@ function MakeSoundMenu() {
 }
 /* SONIDOS DE JUEGO */
 function playMusic() {
-    musicGame.src = "../sounds/gorillaz.mp3";
+    musicGame.src = "./sounds/gorillaz.mp3";
     musicGame.autoplay = !musicGame.autoplay;
     musicGame.volume = 0.05;
 }
