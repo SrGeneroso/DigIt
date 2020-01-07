@@ -33,6 +33,9 @@ var nrgValueDecrement = 5;
 
 //Timepo de Juego
 var initTime = 90;
+//Referencia al intervalo
+var myInterval;
+
 //Referencia al valor actual de contador
 var currentTime;
 //Valor de restauracion de tiempo
@@ -55,18 +58,7 @@ var drillFx = "../sounds/drill.mp3";
 /* >>FUNCION PRINCIPAL DEL SCRIPT */
 document.body.onload = (() => StartGame())
 
-/* SONIDOS DE JUEGO */
-function playMusic() {
-    musicGame.src = "../sounds/gorillaz.mp3";
-    musicGame.autoplay = true;
-    musicGame.volume = 0.1;
-}
 
-function playFx(currentfx) {
-    fxGame.src = currentfx;
-    fxGame.autoplay = true;
-    fxGame.volume = 0.1;
-}
 
 
 //Inicializamos las funciones principales
@@ -74,7 +66,7 @@ function StartGame() {
     SetMapSize();
     SetMatch();
     MakePowerMenu();
-    MakeLevelMenu();
+    MakeSoundMenu();
     ResetBoard();
     // showOverlay();
     // playMusic();
@@ -87,11 +79,24 @@ function showOverlay() {
 }
 
 function MakeLevelMenu() {
+    //referencia al elemento html
+    let levelMenu = document.getElementById("mnLevel");
+    //borramos todos los elementos
+    levelMenu.innerHTML = "";
+
+    //creamos un elemento por cada nivel del juego
     stageMaster.forEach((level, index) => {
         let newLevelItem = document.createElement('div');
+        //introducimos texto
+        newLevelItem.textContent = "LEVEL " + (index + 1);
+        //asignamos clase
         newLevelItem.classList.add("mnLevelItem");
-        newLevelItem.id = "Level" + (index + 1)
-        newLevelItem.textContent = "Level " + (index + 1)
+        //si es el nivel actual extendemos el selector de clase
+
+        if (index === currentPlayerLevel) {
+
+            newLevelItem.classList.add("current");
+        }
         document.getElementById("mnLevel").appendChild(newLevelItem);
     })
 
@@ -113,6 +118,8 @@ function ResetBoard() {
     document.getElementById("menuObjetos").innerHTML = "";
     //creamos los objetos de menu del nivel actual
     MakeobjectsMenu();
+    //actualizamos el marcador del menu level
+    MakeLevelMenu();
     //reseteamos la energia
     resetcurrentNrg();
     //reseteamos el tiempo
@@ -234,6 +241,27 @@ function MakeobjectsMenu() {
     })
 }
 
+function MakeSoundMenu() {
+    document.getElementById("musicButton").addEventListener("click", this.playMusic);
+    document.getElementById("fxButton").addEventListener("click", this.MuteFX);
+}
+/* SONIDOS DE JUEGO */
+function playMusic() {
+    musicGame.src = "../sounds/gorillaz.mp3";
+    musicGame.autoplay = !musicGame.autoplay;
+    musicGame.volume = 0.05;
+}
+
+function PlayFx(currentfx) {
+    fxGame.src = currentfx;
+    fxGame.volume = 0.1;
+    console.log("fx event");
+}
+
+function MuteFX() {
+    fxGame.autoplay = !fxGame.autoplay;
+}
+
 /* << FUNCIONES BASICAS PARA CREACION DEL TABLERO */
 
 /** >> FUNCIONES PARA LA CREACION PROCEDURAL DE LOS NIVELES E ITEMS */
@@ -351,7 +379,7 @@ function AssignRandomPositionToItem(item) {
 /* >> FUNCIONES RELACIONADAS CON EL TIEMPO DE JUEGO*/
 
 // Iniciar temporizador
-function StartTimer(myInterval, timer = document.querySelector(".currentTime")) {
+function StartTimer(timer = document.querySelector(".currentTime")) {
     //reseteamos el contador
     clearInterval(myInterval);
     //resetear valor total de tiempo de juego
@@ -411,11 +439,11 @@ function tileClick() {
     //reproduce efecto de sonido de la tile dependien do si tiene objeto o ono
     if (itHasItem) {
         itemSolver(item);
-        playFx(drillFx)
+        PlayFx(drillFx)
     } else {
         nrgSubstract();
         console.log("nothing, good luck next time");
-        playFx(clickFx);
+        PlayFx(clickFx);
     }
 }
 
