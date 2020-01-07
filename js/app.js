@@ -51,6 +51,8 @@ var musicGame = document.getElementById("music");
 var fxGame = document.getElementById("fx");
 var clickFx = "./sounds/click.mp3";
 var drillFx = "./sounds/drill.mp3";
+clickFx.autoplay = true;
+drillFx.autoplay = true;
 
 //control de puntuacion
 var currentLevelScore = 0;
